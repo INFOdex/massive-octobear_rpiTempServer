@@ -1,8 +1,10 @@
 #!/usr/bin/python
 
-
+import sqlite3
+import time
 import sys
 import os
+import glob
 
 ################################ Get i2c data #############################################
 
@@ -20,4 +22,17 @@ print temp_f
 
 ###########################################################################################
 
+############################### Put into SQL Database #####################################
 
+dbname = '/home/pi/sensor_data.sqlite'	#database file
+
+conn = sqlite3.connect(dbname)		#open the sql file
+curs=conn.cursor()
+			#VV Put the data into the two-field table VV#
+curs.execute("insert into temperature_data values((?), datetime('now'))",(temp_f,))
+
+conn.commit()
+
+conn.close()
+
+###########################################################################################
