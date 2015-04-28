@@ -17,6 +17,7 @@ except os.error as e:
 
 temp_raw = int(temp_raw,16)		#mess with the number because it is recieved in hex
 temp_f = ((temp_raw*0.26)-509.96)	#change it to fahrenheit from raw
+round(temp_f,2)
 
 print temp_f
 
@@ -29,7 +30,7 @@ dbname = '/home/pi/sensor_data.sqlite'	#database file
 conn = sqlite3.connect(dbname)		#open the sql file
 curs=conn.cursor()
 			#VV Put the data into the two-field table VV#
-curs.execute("insert into temperature_data values((?), datetime('now'))",(temp_f,))
+curs.execute("insert or replace  into temperature_data values((?), datetime('now'))",(temp_f,))
 
 conn.commit()
 
