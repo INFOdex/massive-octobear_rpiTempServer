@@ -15,17 +15,25 @@ in this repository under the name:
 "rawdata"
 
 
-Data was then organized by timestamp (date and time) and plotted using matplotlib/pyplot. Cron is used to run this 
-program every 5 minutes to update the graph on the webserver. This program can be found in this repository under the name:
+Data was then organized by timestamp (date and time) and plotted using matplotlib/pyplot. This program can be
+ found in this repository under the name:
 
 
 "graph_maker"
 
 
-A php file is then used to display the graph that is generated. It can be found in this repository under the name:
+A python script was written to compare the time of a file's creation to a designated time 5 minutes from when the website is 
+accessed. This script (most notably) uses the os, time, and datetime python libraries. This script was pointed at the graph of 
+the data output by graph)maker. This file can be found in this git repository under the nam:
 
 
-index.php
+"timecreated"
+
+
+A php file is then used to call the previous script, and display the graph that is generated. It can be found in this repository under the name:
+
+
+"index.php"
 
 
 

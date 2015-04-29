@@ -1,0 +1,19 @@
+#!/usr/bin/python
+
+import os.path
+import os
+import time
+from datetime import datetime
+from datetime import timedelta
+#from matplotlib import dates
+
+time_c = time.ctime(os.path.getctime('/var/www/graph.png'))	#get the time graph is created
+
+time_c = datetime.strptime(time_c,"%a %b %d %H:%M:%S %Y")	#get the time in datetime format
+
+time_5 = datetime.now() - timedelta(minutes=1)			#get the time five minutes ago
+
+if (time_c < time_5):
+	os.system("sudo /home/pi/ece331/proj2/rpi_temperature-sensor/massive-octobear_rpiTempServer/graph_maker")
+else:
+	print "graph for webserver did not need to be updated"
