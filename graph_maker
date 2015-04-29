@@ -12,7 +12,8 @@ import numpy
 import dateutil
 
 from datetime import datetime
-import matplotlib.dates as mdates
+from matplotlib import dates
+from matplotlib.dates import DayLocator, DateFormatter
 
 templist = list()			#temperatures
 timelist = list()			#dates/times
@@ -28,7 +29,25 @@ c.execute("select * from temperature_data order by time asc")
 
 for record in c.fetchall():
 	templist.append(record[0])
-	timelist.append(record[1])
+	timelist.append(datetime.strptime(record[1], "%d/%m/%Y %H:%M"))
 
-print templist
-print timelist
+formatted_time = dates.date2num(timelist)
+form = dates.DateFormatter('%H:%M %d/%m/%Y')
+
+figure = plt.figure(figsize=(8,6))
+plt.grid(True)
+plt.xticks(rotation =80)
+ax = plt.gca()
+ax.xaxis.set_major_formatter(form)
+
+plot = figure.add_subplot(111)
+plot.set_title('RPi Temperature Sensor Data Over 24h Period')
+plot.set_xlabel('Time and Date (HH:MM MM/DD/YYYY)')
+plot.set_ylabel('Temperature in Fahrenheit')
+plot.autoscale_view(True,True,True)
+
+plot.plot_date(formatted_time, templist, 'o')
+plt.savefig("/var/www/graph.png", transparent=True, bbox_inches='tight')
+
+conn.commit()
+conn.close()
