@@ -3,7 +3,7 @@
 
 <?php
 echo "<center><TABLE BGCOLOR = \"FFFFFF\" border=2><TR>";
-echo "<TD><img src=\"grpah.jpg\"></TD>";
+echo "<TD><img src=\"graph.jpg\"></TD>";
 echo "</TR></TABLE><center>";
 ?>
 
